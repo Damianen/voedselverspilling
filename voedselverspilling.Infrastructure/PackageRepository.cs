@@ -1,23 +1,69 @@
-namespace voedselverspilling.Models {
+using voedselverspilling.Domain.Models;
+using voedselverspilling.DomainServices;
+using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 
-public class PackageRepository : IRepository<Package>
+namespace voedselverspilling.Infrastructure {
+
+public class PackageRepository(voedselverspillingDBContext DBContext) : IRepository<Package>, IPackageRepository
 {
-    private static List<Package> packages = new();
-    public static IEnumerable<Package> Packages => packages;
-
-    public void Add(Package item)
+    public IEnumerable<Package> getAll()
     {
-        packages.Add(item);
+        return DBContext.Packages;
     }
 
-    public void Remove(Package item)
+    public IQueryable<Package> GetAllAsync()
     {
-        packages.Remove(item);
+        return DBContext.Packages.AsQueryable();
     }
 
-    public void Update(int id, Package item)
+    public Package GetById(int id)
     {
-        // TODO add this mehtod
+        return DBContext.Packages.FirstOrDefault(x => x.Id == id);
+    }
+
+    public async Task<Package> GetByIdAsync(int id)
+    {
+        return await DBContext.Packages.FirstOrDefaultAsync(x => x.Id == id);
+    }
+
+    public async Task<Package> AddAsync(Package item)
+    {
+        var result = await DBContext.AddAsync(item);
+        await DBContext.SaveChangesAsync();
+        return result.Entity;
+    }
+
+    public async Task<Package> RemoveAsync(Package item)
+    {
+       return null;
+    }
+
+    public async Task<Package> UpdateAsync(Package item)
+    {
+        var PackageUpdate = await DBContext.Packages.FirstOrDefaultAsync(m => m.Id == item.Id);
+        try
+        {
+            PackageUpdate.Name = item.Name;
+            PackageUpdate.City = item.City;
+            PackageUpdate.Price = item.Price;
+            PackageUpdate.Mature = item.Mature;
+            PackageUpdate.Pickup = item.Pickup;
+            PackageUpdate.MealType = item.MealType;
+            PackageUpdate.Products = item.Products;
+            PackageUpdate.Reservor = item.Reservor;
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+
+        return PackageUpdate ?? null;
+    }
+
+    public IEnumerable<Product> GetAllByIdProducts(int id)
+    {
+        return DBContext.Packages.FirstOrDefault(x => x.Id == id).Products;
     }
 }
 

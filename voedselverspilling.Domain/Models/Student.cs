@@ -1,4 +1,4 @@
-namespace voedselverspilling.Models {
+namespace voedselverspilling.Domain.Models {
 
 public class Student
 {

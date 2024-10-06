@@ -1,6 +1,16 @@
+namespace voedselverspilling.DomainServices {
+
 public interface IRepository<T>
 {
-    void Add(T item);
-    void Remove(T item);
-    void Update(int id, T item);
+    public IEnumerable<T> getAll();
+    public IQueryable<T> GetAllAsync();
+
+    public T GetById(int id);
+    public Task<T> GetByIdAsync(int id);
+
+    public Task<T> AddAsync(T item);
+    public Task<T> RemoveAsync(T item);
+    public Task<T> UpdateAsync(T item);
+}
+
 }
