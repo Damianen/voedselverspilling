@@ -1,13 +1,12 @@
 using voedselverspilling.Domain.Models;
 using voedselverspilling.DomainServices;
-using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
 namespace voedselverspilling.Infrastructure {
 
 public class PackageRepository(voedselverspillingDBContext DBContext) : IPackageRepository
 {
-    public IEnumerable<Package> getAll()
+    public IEnumerable<Package> GetAll()
     {
         return DBContext.Packages;
     }
@@ -34,9 +33,10 @@ public class PackageRepository(voedselverspillingDBContext DBContext) : IPackage
         return result.Entity;
     }
 
-    public async Task<Package> RemoveAsync(Package item)
+    public async void RemoveAsync(Package item)
     {
-       return null;
+        DBContext.Packages.Remove(item);
+        await DBContext.SaveChangesAsync();
     }
 
     public async Task<Package> UpdateAsync(Package item)
