@@ -6,6 +6,10 @@ namespace voedselverspilling.Infrastructure {
 
 public class voedselverspillingDBContext : DbContext {
 
+    public voedselverspillingDBContext(DbContextOptions<voedselverspillingDBContext> options) : base(options)
+    {
+    }
+
     public DbSet<Canteen> Canteens { get; set; } = null!;
 
     public DbSet<Package> Packages { get; set; } = null!;
