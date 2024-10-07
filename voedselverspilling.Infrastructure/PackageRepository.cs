@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace voedselverspilling.Infrastructure {
 
-public class PackageRepository(voedselverspillingDBContext DBContext) : IRepository<Package>, IPackageRepository
+public class PackageRepository(voedselverspillingDBContext DBContext) : IPackageRepository
 {
     public IEnumerable<Package> getAll()
     {
