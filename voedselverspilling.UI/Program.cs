@@ -12,7 +12,8 @@ builder.Services.AddScoped<ICanteenRepository, CanteenRepository>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 
-builder.Services.AddDbContext<voedselverspillingDBContext>(options =>  options.UseNpgsql(@"Server=localhost;Database=voedselverspilling;Port=5432;User Id=postgres;Password=password;"));
+builder.Services.AddDbContext<voedselverspillingDBContext>(options =>
+        options.UseNpgsql(builder.Configuration.GetConnectionString("Voedselverspilling")));
 
 var app = builder.Build();
 

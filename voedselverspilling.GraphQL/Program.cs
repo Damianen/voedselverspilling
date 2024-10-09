@@ -6,10 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IPackageRepository, PackageRepository>();
+builder.Services.AddScoped<ICanteenRepository, CanteenRepository>();
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 
-var connectionString = builder.Configuration.GetConnectionString("Default");
-builder.Services.AddDbContext<voedselverspillingDBContext>(options => options.UseNpgsql(connectionString));
+builder.Services.AddDbContext<voedselverspillingDBContext>(options =>
+        options.UseNpgsql(builder.Configuration.GetConnectionString("Voedselverspilling")));
 
 builder.Services
     .AddGraphQL()

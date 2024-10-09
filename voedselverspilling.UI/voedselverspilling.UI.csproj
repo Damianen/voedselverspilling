@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
     <ProjectReference Include="..\voedselverspilling.Domain\voedselverspilling.Domain.csproj" />
@@ -22,6 +22,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>52377283-6808-477a-a67c-3a97d191d8d3</UserSecretsId>
   </PropertyGroup>
 
 </Project>

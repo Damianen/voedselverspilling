@@ -19,11 +19,6 @@ public class voedselverspillingDBContext : DbContext {
     public DbSet<Employee> Employees { get; set; } = null!;
 
     public DbSet<Product> Products { get; set; } = null!;
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseNpgsql(@"Server=localhost;Database=voedselverspilling;Port=5432;User Id=postgres;Password=password;");
-    }
 }
 
 }
