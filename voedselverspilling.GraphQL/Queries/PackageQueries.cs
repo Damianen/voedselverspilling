@@ -5,8 +5,8 @@ namespace voedselverspilling.GraphQL.Queries {
 
 public class PackageQueries()
 {
-    public IEnumerable<Package> GetStudentClasses([Service] IPackageRepository _packageRepository) => _packageRepository.GetAllAsync();
-    public async Task<Package> GetStudentClasses([Service] IPackageRepository _packageRepository, int id) => await _packageRepository.GetByIdAsync(id);
+    public IEnumerable<Package> GetPackages([Service] IPackageRepository _packageRepository) => _packageRepository.GetAllAsync();
+    public async Task<Package> GetPackages([Service] IPackageRepository _packageRepository, int id) => await _packageRepository.GetByIdAsync(id);
 }
 
 }

@@ -16,10 +16,9 @@ builder.Services.AddDbContext<voedselverspillingDBContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("Voedselverspilling")));
 
 builder.Services
-    .AddGraphQL()
-    .RegisterService<IPackageRepository>()
-    .AddMutationType<Mutation>()
+    .AddGraphQLServer()
     .AddQueryType<PackageQueries>();
+
 
 var app = builder.Build();
 
