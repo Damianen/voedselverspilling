@@ -1,5 +1,4 @@
 using voedselverspilling.DomainServices;
-using voedselverspilling.GraphQL.Mutation;
 using voedselverspilling.GraphQL.Queries;
 using voedselverspilling.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +16,7 @@ builder.Services.AddDbContext<voedselverspillingDBContext>(options =>
 
 builder.Services
     .AddGraphQLServer()
-    .AddQueryType<PackageQueries>();
+    .AddQueryType<Queries>();
 
 
 var app = builder.Build();
