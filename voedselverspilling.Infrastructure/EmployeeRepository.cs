@@ -46,7 +46,7 @@ public class EmployeeRepository(voedselverspillingDBContext DBContext) : IEmploy
         {
             EmployeeUpdate.Name = item.Name;
             EmployeeUpdate.Number = item.Number;
-            EmployeeUpdate.Location = item.Location;
+            EmployeeUpdate.Canteen = item.Canteen;
         }
         catch (Exception e)
         {
@@ -59,7 +59,7 @@ public class EmployeeRepository(voedselverspillingDBContext DBContext) : IEmploy
 
     public IEnumerable<Employee> GetAllByCanteenId(int id)
     {
-        return DBContext.Employees.Where(x => x.Location == DBContext.Canteens.FirstOrDefault(x => x.Id == id));
+        return DBContext.Employees.Where(x => x.Canteen == DBContext.Canteens.FirstOrDefault(x => x.Id == id));
     }
 
     public Employee GetByNumber(int number)

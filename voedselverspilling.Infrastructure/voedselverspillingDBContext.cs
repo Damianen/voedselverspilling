@@ -19,6 +19,8 @@ public class voedselverspillingDBContext : DbContext {
     public DbSet<Employee> Employees { get; set; } = null!;
 
     public DbSet<Product> Products { get; set; } = null!;
+
+    public DbSet<Resorvation> Resorvations { get; set; } = null!;
 }
 
 }

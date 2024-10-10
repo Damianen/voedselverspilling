@@ -45,13 +45,12 @@ public class PackageRepository(voedselverspillingDBContext DBContext) : IPackage
         try
         {
             PackageUpdate.Name = item.Name;
-            PackageUpdate.City = item.City;
+            PackageUpdate.Canteen = item.Canteen;
             PackageUpdate.Price = item.Price;
             PackageUpdate.Mature = item.Mature;
             PackageUpdate.Pickup = item.Pickup;
             PackageUpdate.MealType = item.MealType;
             PackageUpdate.Products = item.Products;
-            PackageUpdate.Reservor = item.Reservor;
         }
         catch (Exception e)
         {

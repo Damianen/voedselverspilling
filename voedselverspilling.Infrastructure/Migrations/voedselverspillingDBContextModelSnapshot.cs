@@ -17,7 +17,7 @@ namespace voedselverspilling.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -31,12 +31,15 @@ namespace voedselverspilling.Infrastructure.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool?>("HotMeals")
+                        .IsRequired()
                         .HasColumnType("boolean");
 
                     b.Property<string>("Location")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -52,18 +55,20 @@ namespace voedselverspilling.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
 
-                    b.Property<int?>("LocationId")
+                    b.Property<int>("CanteenId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int?>("Number")
+                        .IsRequired()
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LocationId");
+                    b.HasIndex("CanteenId");
 
                     b.ToTable("Employees");
                 });
@@ -76,30 +81,31 @@ namespace voedselverspilling.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
 
-                    b.Property<string>("City")
-                        .HasColumnType("text");
+                    b.Property<int>("CanteenId")
+                        .HasColumnType("integer");
 
                     b.Property<bool?>("Mature")
+                        .IsRequired()
                         .HasColumnType("boolean");
 
-                    b.Property<int?>("MealType")
+                    b.Property<int>("MealType")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("Pickup")
+                        .IsRequired()
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<float?>("Price")
+                        .IsRequired()
                         .HasColumnType("real");
-
-                    b.Property<int?>("ReservorId")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ReservorId");
+                    b.HasIndex("CanteenId");
 
                     b.ToTable("Packages");
                 });
@@ -113,15 +119,18 @@ namespace voedselverspilling.Infrastructure.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
 
                     b.Property<bool?>("Alcoholic")
+                        .IsRequired()
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int?>("PackageId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Picture")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -129,6 +138,29 @@ namespace voedselverspilling.Infrastructure.Migrations
                     b.HasIndex("PackageId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("voedselverspilling.Domain.Models.Resorvation", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+
+                    b.Property<int>("PackageId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PackageId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Resorvations");
                 });
 
             modelBuilder.Entity("voedselverspilling.Domain.Models.Student", b =>
@@ -140,24 +172,31 @@ namespace voedselverspilling.Infrastructure.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
 
                     b.Property<DateTime?>("Birthday")
+                        .IsRequired()
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool?>("Mature")
+                        .IsRequired()
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int?>("Number")
+                        .IsRequired()
                         .HasColumnType("integer");
 
                     b.Property<string>("Phone")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -167,20 +206,24 @@ namespace voedselverspilling.Infrastructure.Migrations
 
             modelBuilder.Entity("voedselverspilling.Domain.Models.Employee", b =>
                 {
-                    b.HasOne("voedselverspilling.Domain.Models.Canteen", "Location")
+                    b.HasOne("voedselverspilling.Domain.Models.Canteen", "Canteen")
                         .WithMany()
-                        .HasForeignKey("LocationId");
+                        .HasForeignKey("CanteenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Location");
+                    b.Navigation("Canteen");
                 });
 
             modelBuilder.Entity("voedselverspilling.Domain.Models.Package", b =>
                 {
-                    b.HasOne("voedselverspilling.Domain.Models.Student", "Reservor")
+                    b.HasOne("voedselverspilling.Domain.Models.Canteen", "Canteen")
                         .WithMany()
-                        .HasForeignKey("ReservorId");
+                        .HasForeignKey("CanteenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Reservor");
+                    b.Navigation("Canteen");
                 });
 
             modelBuilder.Entity("voedselverspilling.Domain.Models.Product", b =>
@@ -188,6 +231,25 @@ namespace voedselverspilling.Infrastructure.Migrations
                     b.HasOne("voedselverspilling.Domain.Models.Package", null)
                         .WithMany("Products")
                         .HasForeignKey("PackageId");
+                });
+
+            modelBuilder.Entity("voedselverspilling.Domain.Models.Resorvation", b =>
+                {
+                    b.HasOne("voedselverspilling.Domain.Models.Package", "Package")
+                        .WithMany()
+                        .HasForeignKey("PackageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("voedselverspilling.Domain.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Package");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("voedselverspilling.Domain.Models.Package", b =>

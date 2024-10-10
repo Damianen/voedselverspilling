@@ -2,19 +2,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace voedselverspilling.Domain.Models {
 
-public class Employee
+public class Resorvation
 {
     [Key]
     public int? Id { get; init; }
 
     [Required]
-    public string? Name { get; set; }
+    public Student? Student { get; init; }
 
     [Required]
-    public int? Number { get; set; }
-
-    [Required]
-    public Canteen? Canteen { get; set; }
+    public Package? Package { get; init; }
 }
 
 }
