@@ -54,6 +54,15 @@ public class ResorvationRepository(voedselverspillingDBContext DBContext) : IRes
         return DBContext.Resorvations.FirstOrDefault(x => x.Package.Id == packageId);
     }
 
-}
+    public async Task<Resorvation> AddByIdsAsync(int studentId, int packageId)
+    {
+        var resorvation = new Resorvation(
+                DBContext.Students.FirstOrDefault(x => x.Id == studentId),
+                DBContext.Packages.FirstOrDefault(x => x.Id == packageId)
+            );
+        var result = await DBContext.Resorvations.AddAsync(resorvation);
+        return result.Entity;
+    }
+ }
 
 }
