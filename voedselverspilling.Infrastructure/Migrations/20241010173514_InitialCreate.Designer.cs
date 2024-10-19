@@ -12,7 +12,7 @@ using voedselverspilling.Infrastructure;
 namespace voedselverspilling.Infrastructure.Migrations
 {
     [DbContext(typeof(voedselverspillingDBContext))]
-    [Migration("20241010110201_InitialCreate")]
+    [Migration("20241010173514_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -61,6 +61,10 @@ namespace voedselverspilling.Infrastructure.Migrations
                     b.Property<int>("CanteenId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -68,6 +72,10 @@ namespace voedselverspilling.Infrastructure.Migrations
                     b.Property<int?>("Number")
                         .IsRequired()
                         .HasColumnType("integer");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -154,6 +162,9 @@ namespace voedselverspilling.Infrastructure.Migrations
                     b.Property<int>("PackageId")
                         .HasColumnType("integer");
 
+                    b.Property<bool?>("PickedUp")
+                        .HasColumnType("boolean");
+
                     b.Property<int>("StudentId")
                         .HasColumnType("integer");
 
@@ -197,6 +208,10 @@ namespace voedselverspilling.Infrastructure.Migrations
                     b.Property<int?>("Number")
                         .IsRequired()
                         .HasColumnType("integer");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Phone")
                         .IsRequired()

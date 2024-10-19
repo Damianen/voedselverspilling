@@ -47,6 +47,8 @@ public class EmployeeRepository(voedselverspillingDBContext DBContext) : IEmploy
             EmployeeUpdate.Name = item.Name;
             EmployeeUpdate.Number = item.Number;
             EmployeeUpdate.Canteen = item.Canteen;
+            EmployeeUpdate.Email = item.Email;
+            EmployeeUpdate.Password = item.Password;
         }
         catch (Exception e)
         {

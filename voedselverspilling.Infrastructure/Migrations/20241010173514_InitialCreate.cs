@@ -39,7 +39,8 @@ namespace voedselverspilling.Infrastructure.Migrations
                     Email = table.Column<string>(type: "text", nullable: false),
                     City = table.Column<string>(type: "text", nullable: false),
                     Phone = table.Column<string>(type: "text", nullable: false),
-                    Mature = table.Column<bool>(type: "boolean", nullable: false)
+                    Mature = table.Column<bool>(type: "boolean", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,7 +55,9 @@ namespace voedselverspilling.Infrastructure.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Number = table.Column<int>(type: "integer", nullable: false),
-                    CanteenId = table.Column<int>(type: "integer", nullable: false)
+                    CanteenId = table.Column<int>(type: "integer", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -119,7 +122,8 @@ namespace voedselverspilling.Infrastructure.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     StudentId = table.Column<int>(type: "integer", nullable: false),
-                    PackageId = table.Column<int>(type: "integer", nullable: false)
+                    PackageId = table.Column<int>(type: "integer", nullable: false),
+                    PickedUp = table.Column<bool>(type: "boolean", nullable: true)
                 },
                 constraints: table =>
                 {

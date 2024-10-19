@@ -15,6 +15,12 @@ public class Employee
 
     [Required]
     public Canteen? Canteen { get; set; }
+
+    [Required]
+    public string? Email { get; set; }
+
+    [Required]
+    public string? Password { get; set; }
 }
 
 }

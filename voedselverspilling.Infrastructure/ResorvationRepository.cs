@@ -39,9 +39,20 @@ public class ResorvationRepository(voedselverspillingDBContext DBContext) : IRes
         await DBContext.SaveChangesAsync();
     }
 
-    public Task<Resorvation> UpdateAsync(Resorvation item)
+    public async Task<Resorvation> UpdateAsync(Resorvation item)
     {
-        throw new Exception();
+        var ResorvationUpdate = await DBContext.Resorvations.FirstOrDefaultAsync(m => m.Id == item.Id);
+        try
+        {
+            ResorvationUpdate.PickedUp = item.PickedUp;
+        }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+
+        await DBContext.SaveChangesAsync();
+        return ResorvationUpdate ?? null;
     }
 
     public Resorvation GetByStudentId(int studentId)

@@ -12,6 +12,8 @@ public class Resorvation
 
     [Required]
     public Package? Package { get; init; }
+
+    public bool? PickedUp { get; set; }
 }
 
 }

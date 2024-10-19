@@ -51,6 +51,7 @@ public class StudentRepository(voedselverspillingDBContext DBContext) : IStudent
             StudentUpdate.Mature = item.Mature;
             StudentUpdate.Number = item.Number;
             StudentUpdate.Birthday = item.Birthday;
+            StudentUpdate.Password = item.Password;
         }
         catch (Exception e)
         {
