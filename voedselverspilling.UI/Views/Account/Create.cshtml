@@ -1,0 +1,70 @@
+@{
+    Layout = "_Layout";
+    ViewData["title"] = "Login";
+}
+
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <img class="mx-auto h-20 w-auto" src="~/images/logo.png" alt="Your Company">
+    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-green_dark">Nieuw account aanmaken</h1>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form class="space-y-6" action="#" method="POST">
+      <div>
+        <label for="name" class="block text-sm font-medium leading-6 text-gray-900">volledige naam</label>
+        <div class="mt-2">
+          <input id="name" name="name" type="text" autocomplete="text" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green_primairy sm:text-sm sm:leading-6">
+        </div>
+      </div>
+
+      <div>
+        <label for="birthday" class="block text-sm font-medium leading-6 text-gray-900">Geboorte datum</label>
+        <div class="mt-2">
+          <input id="birthday" name="birthday" type="date" autocomplete="date" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green_primairy sm:text-sm sm:leading-6">
+        </div>
+      </div>
+
+      <div>
+        <label for="number" class="block text-sm font-medium leading-6 text-gray-900">Student nummer</label>
+        <div class="mt-2">
+          <input id="number" name="number" type="number" autocomplete="number" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green_primairy sm:text-sm sm:leading-6">
+        </div>
+      </div>
+
+      <div>
+        <label for="phone" class="block text-sm font-medium leading-6 text-gray-900">Telefoon nummer</label>
+        <div class="mt-2">
+          <input id="phone" name="phone" type="tel" autocomplete="tel" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green_primairy sm:text-sm sm:leading-6">
+        </div>
+      </div>
+
+      <div>
+        <label for="city" class="block text-sm font-medium leading-6 text-gray-900">Stad waar jij studeert</label>
+        <div class="mt-2">
+          <input id="city" name="city" type="text" autocomplete="text" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green_primairy sm:text-sm sm:leading-6">
+        </div>
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+        <div class="mt-2">
+          <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green_primairy sm:text-sm sm:leading-6">
+        </div>
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between">
+          <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Wachtwoord</label>
+        </div>
+        <div class="mt-2">
+          <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green_primairy sm:text-sm sm:leading-6">
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" class="flex w-full justify-center rounded-md bg-green_primairy px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green_secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Account aanmaken</button>
+      </div>
+    </form>
+  </div>
+</div>
