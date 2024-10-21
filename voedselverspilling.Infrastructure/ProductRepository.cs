@@ -45,8 +45,8 @@ public class ProductRepository(voedselverspillingDBContext DBContext) : IProduct
         try
         {
             ProductUpdate.Name = item.Name;
-            ProductUpdate.Picture = item.Picture;
             ProductUpdate.Alcoholic = item.Alcoholic;
+            ProductUpdate.Ingredients = item.Ingredients;
         }
         catch (Exception e)
         {

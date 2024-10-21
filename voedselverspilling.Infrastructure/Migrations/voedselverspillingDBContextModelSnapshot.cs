@@ -47,40 +47,6 @@ namespace voedselverspilling.Infrastructure.Migrations
                     b.ToTable("Canteens");
                 });
 
-            modelBuilder.Entity("voedselverspilling.Domain.Models.Employee", b =>
-                {
-                    b.Property<int?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
-
-                    b.Property<int>("CanteenId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int?>("Number")
-                        .IsRequired()
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CanteenId");
-
-                    b.ToTable("Employees");
-                });
-
             modelBuilder.Entity("voedselverspilling.Domain.Models.Package", b =>
                 {
                     b.Property<int?>("Id")
@@ -91,6 +57,10 @@ namespace voedselverspilling.Infrastructure.Migrations
 
                     b.Property<int>("CanteenId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<bool?>("Mature")
                         .IsRequired()
@@ -130,16 +100,16 @@ namespace voedselverspilling.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("boolean");
 
+                    b.Property<string>("Ingredients")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int?>("PackageId")
                         .HasColumnType("integer");
-
-                    b.Property<string>("Picture")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -162,72 +132,15 @@ namespace voedselverspilling.Infrastructure.Migrations
                     b.Property<bool?>("PickedUp")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("StudentId")
-                        .HasColumnType("integer");
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PackageId");
 
-                    b.HasIndex("StudentId");
-
                     b.ToTable("Resorvations");
-                });
-
-            modelBuilder.Entity("voedselverspilling.Domain.Models.Student", b =>
-                {
-                    b.Property<int?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
-
-                    b.Property<DateTime?>("Birthday")
-                        .IsRequired()
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool?>("Mature")
-                        .IsRequired()
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int?>("Number")
-                        .IsRequired()
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Students");
-                });
-
-            modelBuilder.Entity("voedselverspilling.Domain.Models.Employee", b =>
-                {
-                    b.HasOne("voedselverspilling.Domain.Models.Canteen", "Canteen")
-                        .WithMany()
-                        .HasForeignKey("CanteenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Canteen");
                 });
 
             modelBuilder.Entity("voedselverspilling.Domain.Models.Package", b =>
@@ -256,15 +169,7 @@ namespace voedselverspilling.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("voedselverspilling.Domain.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Package");
-
-                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("voedselverspilling.Domain.Models.Package", b =>

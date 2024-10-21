@@ -51,6 +51,7 @@ public class PackageRepository(voedselverspillingDBContext DBContext) : IPackage
             PackageUpdate.Pickup = item.Pickup;
             PackageUpdate.MealType = item.MealType;
             PackageUpdate.Products = item.Products;
+            PackageUpdate.ImageName = item.ImageName;
         }
         catch (Exception e)
         {

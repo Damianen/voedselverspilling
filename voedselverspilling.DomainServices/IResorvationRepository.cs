@@ -4,7 +4,7 @@ namespace voedselverspilling.DomainServices {
 
 public interface IResorvationRepository : IRepository<Resorvation>
 {
-    public Resorvation GetByStudentId(int studentId);
+    public Resorvation GetByStudentId(string studentId);
     public Resorvation GetByPackageId(int packageId);
 }
 

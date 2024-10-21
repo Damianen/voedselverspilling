@@ -4,9 +4,10 @@ namespace voedselverspilling.Domain.Models {
 
 public enum MealTypes
 {
-    Bread,
-    HotMeal,
-    Drink
+    Breakfast,
+    Lunch,
+    Dinner,
+    Snack
 }
 
 public class Package
@@ -34,6 +35,9 @@ public class Package
 
     [Required]
     public MealTypes? MealType { get; set; }
+
+    [Required]
+    public string? ImageName { get; set; }
 }
 
 }

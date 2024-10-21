@@ -55,9 +55,9 @@ public class ResorvationRepository(voedselverspillingDBContext DBContext) : IRes
         return ResorvationUpdate ?? null;
     }
 
-    public Resorvation GetByStudentId(int studentId)
+    public Resorvation GetByStudentId(string studentId)
     {
-        return DBContext.Resorvations.FirstOrDefault(x => x.Student.Id == studentId);
+        return DBContext.Resorvations.FirstOrDefault(x => x.StudentId == studentId);
     }
 
     public Resorvation GetByPackageId(int packageId)

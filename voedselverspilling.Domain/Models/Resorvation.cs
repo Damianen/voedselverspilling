@@ -8,7 +8,7 @@ public class Resorvation
     public int? Id { get; init; }
 
     [Required]
-    public Student? Student { get; init; }
+    public string? StudentId { get; init; }
 
     [Required]
     public Package? Package { get; init; }

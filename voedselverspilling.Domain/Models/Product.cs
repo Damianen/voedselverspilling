@@ -14,7 +14,7 @@ public class Product
     public bool? Alcoholic { get; set; }
 
     [Required]
-    public string? Picture { get; set; }
+    public string? Ingredients { get; set; }
 }
 
 }
