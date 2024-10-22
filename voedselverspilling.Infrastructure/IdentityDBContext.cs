@@ -6,7 +6,7 @@ using voedselverspilling.Domain.Models;
 namespace voedselverspilling.Infrastructure
 {
 
-public class IdentityDBContext : IdentityDbContext<User>
+public class IdentityDBContext : IdentityDbContext<IdentityUser>
 {
     public IdentityDBContext(DbContextOptions<IdentityDBContext> options) : base(options)
     {
