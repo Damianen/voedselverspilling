@@ -1,6 +1,8 @@
 using voedselverspilling.DomainServices;
 using voedselverspilling.Infrastructure;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using voedselverspilling.Domain.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +23,7 @@ var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
+    app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
 
@@ -37,5 +39,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllers();
+
+//app.MapRazorPages();
 
 app.Run();
