@@ -3,47 +3,167 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - voedselverspilling.UI</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/voedselverspilling.UI.styles.css" asp-append-version="true" />
+    <title>@ViewData["Title"]</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            green_primairy: '#19953c',
+            green_secondary: '#00bf36',
+            green_dark: '#223327',
+            background: '#236a37',
+            text: '#236a37',
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">voedselverspilling.UI</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-                <partial name="_LoginPartial" />
+<body class="min-h-screen flex flex-col justify-between">
+    <header class="relative">
+    <nav aria-label="Top">
+      <div class="bg-white">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex h-16 items-center justify-between">
+            <div class="hidden lg:flex lg:flex-1 lg:items-center">
+              <a asp-area="" asp-controller="Home" asp-action="Index" >
+                <span class="sr-only">Your Company</span>
+                <img class="h-14 w-auto" src="~/images/logo.png" alt="">
+              </a>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - voedselverspilling.UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="hidden h-full lg:flex">
+              <div class="inset-x-0 bottom-0 px-4">
+                <div class="flex h-full justify-center space-x-8">
+                  <a href="#" class="flex items-center text-sm font-medium text-gray-700 hover:text-green_primairy border-b border-white hover:border-b hover:border-green_primairy">Ontbijt pakket</a>
+                  <a href="#" class="flex items-center text-sm font-medium text-gray-700 hover:text-green_primairy border-b border-white hover:border-b hover:border-green_primairy">Lunch pakket</a>
+                  <a href="#" class="flex items-center text-sm font-medium text-gray-700 hover:text-green_primairy border-b border-white hover:border-b hover:border-green_primairy">Diner pakket</a>
+                  <a href="#" class="flex items-center text-sm font-medium text-gray-700 hover:text-green_primairy border-b border-white hover:border-b hover:border-green_primairy">Snack pakket</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-1 items-center lg:hidden">
+              <button type="button" class="-ml-2 rounded-md bg-white p-2 text-gray-400">
+                <span class="sr-only">Open menu</span>
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+              </button>
+            </div>
+
+            <a href="/" class="lg:hidden">
+              <span class="sr-only">Your Company</span>
+              <img src="~/images/logo.png" alt="" class="h-8 w-auto">
+            </a>
+
+            <div class="flex flex-1 items-center justify-end">
+              <div class="flex items-center lg:ml-8">
+                    <partial name="_LoginPartial" />
+              </div>
+            </div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </nav>
+  </header>
+    @RenderBody()
+  <footer aria-labelledby="footer-heading" class="bg-gray-50">
+    <h2 id="footer-heading" class="sr-only">Footer</h2>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="border-t border-gray-200 py-20">
+        <div class="grid grid-cols-1 md:grid-flow-col md:auto-rows-min md:grid-cols-12 md:gap-x-8 md:gap-y-16">
+          <div class="col-span-1 md:col-span-2 lg:col-start-1 lg:row-start-1">
+            <img src="~/images/logo.png" alt="" class="h-14 w-auto">
+          </div>
+
+          <div class="col-span-6 mt-10 grid grid-cols-2 gap-8 sm:grid-cols-3 md:col-span-8 md:col-start-3 md:row-start-1 md:mt-0 lg:col-span-6 lg:col-start-2">
+            <div class="grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8">
+              <div>
+                <h3 class="text-sm font-medium text-gray-900">Pakketen</h3>
+                <ul role="list" class="mt-6 space-y-6">
+                  <li class="text-sm">
+                    <a href="#" class="text-gray-500 hover:text-green_primairy">Ontbijt</a>
+                  </li>
+                  <li class="text-sm">
+                    <a href="#" class="text-gray-500 hover:text-green_primairy">Lunch</a>
+                  </li>
+                  <li class="text-sm">
+                    <a href="#" class="text-gray-500 hover:text-green_primairy">Diner</a>
+                  </li>
+                  <li class="text-sm">
+                    <a href="#" class="text-gray-500 hover:text-green_primairy">Verassing</a>
+                  </li>
+                  <li class="text-sm">
+                    <a href="#" class="text-gray-500 hover:text-green_primairy">Alle pakketen</a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="text-sm font-medium text-gray-900">Over ons</h3>
+                <ul role="list" class="mt-6 space-y-6">
+                  <li class="text-sm">
+                    <a href="#" class="text-gray-500 hover:text-green_primairy">Wie zijn wij</a>
+                  </li>
+                  <li class="text-sm">
+                    <a href="#" class="text-gray-500 hover:text-green_primairy">Sustainability</a>
+                  </li>
+                  <li class="text-sm">
+                    <a href="#" class="text-gray-500 hover:text-green_primairy">Cariere</a>
+                  </li>
+                  <li class="text-sm">
+                    <a href="#" class="text-gray-500 hover:text-green_primairy">Terms &amp; Conditions</a>
+                  </li>
+                  <li class="text-sm">
+                    <a href="#" class="text-gray-500 hover:text-green_primairy">Privacy</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-sm font-medium text-gray-900">Klanten Service</h3>
+              <ul role="list" class="mt-6 space-y-6">
+                <li class="text-sm">
+                  <a href="#" class="text-gray-500 hover:text-green_primairy">Contact</a>
+                </li>
+                <li class="text-sm">
+                  <a href="#" class="text-gray-500 hover:text-green_primairy">Reservering</a>
+                </li>
+                <li class="text-sm">
+                  <a href="#" class="text-gray-500 hover:text-green_primairy">Annuleren</a>
+                </li>
+                <li class="text-sm">
+                  <a href="#" class="text-gray-500 hover:text-green_primairy">FAQ</a>
+                </li>
+                <li class="text-sm">
+                  <a href="#" class="text-gray-500 hover:text-green_primairy">Onze kantines</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mt-12 md:col-span-8 md:col-start-3 md:row-start-2 md:mt-0 lg:col-span-4 lg:col-start-9 lg:row-start-1">
+            <h3 class="text-sm font-medium text-gray-900">Schrijf je in voor onze pakket updates</h3>
+            <p class="mt-6 text-sm text-gray-500">Krijg mails om op de hoogte te blijven van nieuwe pakketen.</p>
+            <form class="mt-2 flex sm:max-w-md">
+              <label for="email-address" class="sr-only">Email address</label>
+              <input id="email-address" type="text" autocomplete="email" required class="w-full min-w-0 appearance-none rounded-md border border-gray-300 bg-white px-4 py-2 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-green_secondary focus:outline-none focus:ring-1 focus:ring-indigo-500">
+              <div class="ml-4 flex-shrink-0">
+                <button type="submit" class="flex w-full items-center justify-center rounded-md border border-transparent bg-green_primairy px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green_secondary focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Schrijf je in</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-100 py-10 text-center">
+        <p class="text-sm text-gray-500">&copy; 2024 Damian Buskens</p>
+      </div>
+    </div>
+  </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

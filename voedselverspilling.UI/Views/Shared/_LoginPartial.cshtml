@@ -1,27 +1,32 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using voedselverspilling.Domain.Models
 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-    </li>
-    <li class="nav-item">
-        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
-        </form>
-    </li>
+    <div class="inset-x-0 bottom-0 px-4">
+        <div class="flex h-full justify-center space-x-8">
+            <form class="flex items-center" id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="text-sm font-medium text-gray-700 hover:text-green_primairy">Logout</button>
+            </form>
+            <a id="manage" class="flex items-center text-sm font-medium text-gray-700 hover:text-green_primairy" asp-area="" asp-controller="Home" asp-action="Account" title="Manage">
+                <span class="sr-only">Account</span>
+                <img src="~/images/user.png" alt="" class="h-8 w-8">
+            </a>
+        </div>
+    </div>
+    
+        
 }
 else
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
+    <div class="inset-x-0 bottom-0 px-4">
+        <div class="flex h-full justify-center space-x-8">
+            <a class="flex items-center text-sm font-medium text-gray-700 hover:text-green_primairy" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            <a class="flex items-center text-sm font-medium text-gray-700 hover:text-green_primairy" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </div>
+    </div>
+    
 }
-</ul>
