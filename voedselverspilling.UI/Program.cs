@@ -16,7 +16,8 @@ builder.Services.AddScoped<IResorvationRepository, ResorvationRepository>();
 builder.Services.AddDbContext<voedselverspillingDBContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("Voedselverspilling")));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<IdentityDBContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<IdentityDBContext>();
 
 builder.Services.AddDbContext<IdentityDBContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("Identity")));
