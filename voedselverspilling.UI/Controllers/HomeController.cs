@@ -1,21 +1,26 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using voedselverspilling.UI.Models;
+using voedselverspilling.DomainServices;
+using voedselverspilling.Domain.Models;
 
 namespace voedselverspilling.UI.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly IPackageRepository _packageRepo;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, IPackageRepository packageRepo)
     {
         _logger = logger;
+        _packageRepo = packageRepo;
     }
 
     public IActionResult Index()
     {
-        return View();
+        var packages = _packageRepo.GetAll().Take(4) ?? new List<Package>();
+        return View(packages.ToList());
     }
 
     public IActionResult Account()

@@ -1,6 +1,8 @@
 using voedselverspilling.Domain.Models;
 using voedselverspilling.DomainServices;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Data;
 
 namespace voedselverspilling.Infrastructure {
 
@@ -64,6 +66,13 @@ public class PackageRepository(voedselverspillingDBContext DBContext) : IPackage
     public IEnumerable<Product> GetAllByIdProducts(int id)
     {
         return DBContext.Packages.FirstOrDefault(x => x.Id == id).Products;
+    }
+
+    public IEnumerable<Package> GetAllWithMealType(MealTypes mealType)
+    {
+        return from package in DBContext.Packages
+               where mealType == package.MealType
+               select package;
     }
 }
 
