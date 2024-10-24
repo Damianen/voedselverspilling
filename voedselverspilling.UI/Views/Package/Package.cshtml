@@ -1,61 +1,64 @@
 @{
-    Layout = "_Layout";
     ViewData["title"] = "Home";
 }
 
+@using Microsoft.AspNetCore.Identity
+@using voedselverspilling.Domain.Models
+
+@inject SignInManager<IdentityUser> SignInManager
+  @inject UserManager<IdentityUser> UserManager
+
+@model voedselverspilling.Domain.Models.Package
+
 <div class="bg-white">
   <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
-    <!-- Product details -->
     <div class="lg:max-w-lg lg:self-end">
       <nav aria-label="Breadcrumb">
         <ol role="list" class="flex items-center space-x-2">
           <li>
             <div class="flex items-center text-sm">
-              <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Ontbijt</a>
-              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="ml-2 h-5 w-5 flex-shrink-0 text-gray-300">
-                <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
-              </svg>
-            </div>
-          </li>
-          <li>
-            <div class="flex items-center text-sm">
-              <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Verassing</a>
+              <a href="#" class="font-medium text-gray-500 hover:text-gray-900">@Model.MealType.ToString()</a>
             </div>
           </li>
         </ol>
       </nav>
 
       <div class="mt-4">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Verassings pakket</h1>
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">@Model.Name</h1>
       </div>
 
       <section aria-labelledby="information-heading" class="mt-4">
         <h2 id="information-heading" class="sr-only">Product information</h2>
 
         <div class="flex items-center">
-          <p class="text-lg text-gray-900 sm:text-xl">€10</p>
-
-          <div class="ml-4 border-l border-gray-300 pl-4">
-            <h2 class="sr-only">Reviews</h2>
-          </div>
+          <p class="text-lg text-gray-900 sm:text-xl">€@Model.Price</p>
         </div>
 
         <div class="mt-4 space-y-6">
-          <p class="text-base text-gray-500">Verassings pakket</p>
+          <p class="text-base text-gray-500">Ingredienten: </p>
+          @if(Model.Name == "Verassing") { <p class="pl-6 text-gray-500"> Verassing </p> }
+          @if (Model.Name != "Verassing")
+          {
+            foreach(var products in Model.Products ?? [])
+            {
+              <p class="pl-6 text-base text-gray-500">@products.Ingredients</p>
+            }
+          }
         </div>
 
         <div class="mt-6 flex items-center">
           <svg class="h-5 w-5 flex-shrink-0 text-green-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
             <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
           </svg>
-          <p class="ml-2 text-sm text-gray-500">Dit pakket is beschikbaar</p>
+          <p class="ml-2 text-sm text-gray-500">Dit pakket is beschikbaar tot @Model.Pickup.ToString()</p>
+          <p class="ml-2 text-sm text-gray-500">En moet worden opgehaalt in @Model.Canteen?.City in de kantine van gebouw @Model.Canteen?.Location</p>
         </div>
       </section>
     </div>
 
     <div class="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
       <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
-        <img src="~/images/Surprise.jpeg" alt="Model wearing light green backpack with black canvas straps and front zipper pouch." class="h-full w-full object-cover object-center">
+        <img src="~/images/@(Model.ImageName).jpeg" alt="Image of the food" class="h-full w-full object-cover object-center">
       </div>
     </div>
 
@@ -63,7 +66,17 @@
       <section aria-labelledby="options-heading">
         <h2 id="options-heading" class="sr-only">Product options</h2>
           <div class="mt-10">
-            <button type="submit" class="flex w-full items-center justify-center rounded-md border border-transparent bg-green_primairy px-8 py-3 text-base font-medium text-white hover:bg-green_secondary focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Reserveren</button>
+            @if (SignInManager.IsSignedIn(User))
+            {
+              <form asp-area="" asp-controller="Resorvation" asp-action="@(Model.Id)" asp-route-returnUrl="@Url.Action("Account", "Home", new { area = "" })">
+                <button type="submit" class="flex w-full items-center justify-center rounded-md border border-transparent bg-green_primairy px-8 py-3 text-base font-medium text-white hover:bg-green_secondary focus:outline-none focus:ring-2 focus:ring-green_primairy focus:ring-offset-2 focus:ring-offset-gray-50">Reserveren</button>
+              </form>
+            }
+            else
+            {
+              <button class="flex w-full items-center justify-center rounded-md border border-transparent bg-green-200 px-8 py-3 text-base font-medium text-red-700 hover:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-offset-2 focus:ring-offset-gray-50">Moet ingelogd zijn om te kunnen reserveren</button>
+            }
+            
           </div>
           <div class="mt-6 text-center">
             <a href="#" class="group inline-flex text-base font-medium">

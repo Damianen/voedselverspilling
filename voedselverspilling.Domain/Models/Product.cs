@@ -5,16 +5,16 @@ namespace voedselverspilling.Domain.Models {
 public class Product
 {
     [Key]
-    public int? Id { get; init; }
+    public int Id { get; init; }
 
     [Required]
-    public string? Name { get; set; }
+    public string Name { get; set; } = "";
 
     [Required]
-    public bool? Alcoholic { get; set; }
+    public bool Alcoholic { get; set; }
 
     [Required]
-    public string? Ingredients { get; set; }
+    public string Ingredients { get; set; } = "";
 }
 
 }

@@ -24,18 +24,17 @@ namespace voedselverspilling.Infrastructure.Migrations
 
             modelBuilder.Entity("voedselverspilling.Domain.Models.Canteen", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<bool?>("HotMeals")
-                        .IsRequired()
+                    b.Property<bool>("HotMeals")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Location")
@@ -49,11 +48,11 @@ namespace voedselverspilling.Infrastructure.Migrations
 
             modelBuilder.Entity("voedselverspilling.Domain.Models.Package", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CanteenId")
                         .HasColumnType("integer");
@@ -62,8 +61,7 @@ namespace voedselverspilling.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<bool?>("Mature")
-                        .IsRequired()
+                    b.Property<bool>("Mature")
                         .HasColumnType("boolean");
 
                     b.Property<int>("MealType")
@@ -73,12 +71,10 @@ namespace voedselverspilling.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("Pickup")
-                        .IsRequired()
+                    b.Property<DateTime>("Pickup")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<float?>("Price")
-                        .IsRequired()
+                    b.Property<float>("Price")
                         .HasColumnType("real");
 
                     b.HasKey("Id");
@@ -90,14 +86,13 @@ namespace voedselverspilling.Infrastructure.Migrations
 
             modelBuilder.Entity("voedselverspilling.Domain.Models.Product", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<bool?>("Alcoholic")
-                        .IsRequired()
+                    b.Property<bool>("Alcoholic")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Ingredients")
@@ -129,8 +124,8 @@ namespace voedselverspilling.Infrastructure.Migrations
                     b.Property<int>("PackageId")
                         .HasColumnType("integer");
 
-                    b.Property<bool?>("PickedUp")
-                        .HasColumnType("boolean");
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
 
                     b.Property<string>("StudentId")
                         .IsRequired()
@@ -138,7 +133,8 @@ namespace voedselverspilling.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PackageId");
+                    b.HasIndex("PackageId")
+                        .IsUnique();
 
                     b.ToTable("Resorvations");
                 });
@@ -163,18 +159,18 @@ namespace voedselverspilling.Infrastructure.Migrations
 
             modelBuilder.Entity("voedselverspilling.Domain.Models.Resorvation", b =>
                 {
-                    b.HasOne("voedselverspilling.Domain.Models.Package", "Package")
-                        .WithMany()
-                        .HasForeignKey("PackageId")
+                    b.HasOne("voedselverspilling.Domain.Models.Package", null)
+                        .WithOne("Resorvation")
+                        .HasForeignKey("voedselverspilling.Domain.Models.Resorvation", "PackageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Package");
                 });
 
             modelBuilder.Entity("voedselverspilling.Domain.Models.Package", b =>
                 {
                     b.Navigation("Products");
+
+                    b.Navigation("Resorvation");
                 });
 #pragma warning restore 612, 618
         }

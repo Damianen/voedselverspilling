@@ -5,16 +5,16 @@ namespace voedselverspilling.Domain.Models {
 public class Canteen
 {
     [Key]
-    public int? Id { get; init; }
+    public int Id { get; init; }
 
     [Required]
-    public string? City { get; set; }
+    public string City { get; init; } = "";
 
     [Required]
-    public string? Location { get; set; }
+    public string Location { get; init; } = "";
 
     [Required]
-    public bool? HotMeals { get; set; }
+    public bool HotMeals { get; set; }
 }
 
 }

@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using voedselverspilling.UI.Models;
 using voedselverspilling.DomainServices;
 using voedselverspilling.Domain.Models;
+using System.Collections.Immutable;
 
 namespace voedselverspilling.UI.Controllers;
 
@@ -19,36 +19,38 @@ public class PackageController : Controller
 
     public IActionResult Index()
     {
-        var packages = _packageRepo.GetAll() ?? new List<Package>();
+        var packages = _packageRepo.GetAll().Where(package => package.Resorvation == null) ?? [];
         return View(packages.ToList());
     }
 
     public IActionResult Breakfast()
     {
-        var packages = _packageRepo.GetAllWithMealType(MealTypes.Breakfast) ?? new List<Package>();
+        var packages = _packageRepo.GetAllWithMealType(MealTypes.Breakfast).Where(package => package.Resorvation == null) ?? [];
         return View("index", packages.ToList());
     }
 
     public IActionResult Lunch()
     {
-        var packages = _packageRepo.GetAllWithMealType(MealTypes.Lunch) ?? new List<Package>();
+        var packages = _packageRepo.GetAllWithMealType(MealTypes.Lunch).Where(package => package.Resorvation == null) ?? [];
         return View("index", packages.ToList());
     }
 
     public IActionResult Dinner()
     {
-        var packages = _packageRepo.GetAllWithMealType(MealTypes.Dinner) ?? new List<Package>();
+        var packages = _packageRepo.GetAllWithMealType(MealTypes.Dinner).Where(package => package.Resorvation == null) ?? [];
         return View("index", packages.ToList());
     }
 
     public IActionResult Snack()
     {
-        var packages = _packageRepo.GetAllWithMealType(MealTypes.Snack) ?? new List<Package>();
+        var packages = _packageRepo.GetAllWithMealType(MealTypes.Snack).Where(package => package.Resorvation == null) ?? [];
         return View("index", packages.ToList());
     }
 
-    public IActionResult Package()
+    [Route("Packages/{id}")]
+    public IActionResult Package(int id)
     {
-        return View();
+        var package = _packageRepo.GetById(id) ?? new Package();
+        return View(package);
     }
 }

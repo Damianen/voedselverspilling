@@ -123,7 +123,7 @@
                                 <img src="~/images/@(package.ImageName).jpeg" alt="Verassing" class="h-full w-full object-cover object-center">
                             </div>
                             <h3 class="mt-4 text-sm text-gray-700">
-                                <a asp-area="" asp-controller="Package" asp-action="Package">
+                                <a asp-area="" asp-controller="Packages" asp-action="@package.Id">
                                     <span class="absolute inset-0"></span>
                                     @package.Name
                                 </a>

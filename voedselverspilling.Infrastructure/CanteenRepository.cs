@@ -18,12 +18,14 @@ public class CanteenRepository(voedselverspillingDBContext DBContext) : ICanteen
 
     public Canteen GetById(int id)
     {
-        return DBContext.Canteens.FirstOrDefault(x => x.Id == id);
+        return DBContext.Canteens.FirstOrDefault(x => x.Id == id)
+            ?? throw new Exception("Id not found");
     }
 
     public async Task<Canteen> GetByIdAsync(int id)
     {
-        return await DBContext.Canteens.FirstOrDefaultAsync(x => x.Id == id);
+        return await DBContext.Canteens.FirstOrDefaultAsync(x => x.Id == id)
+            ?? throw new Exception("Id not found");
     }
 
     public async Task<Canteen> AddAsync(Canteen item)
@@ -41,20 +43,13 @@ public class CanteenRepository(voedselverspillingDBContext DBContext) : ICanteen
 
     public async Task<Canteen> UpdateAsync(Canteen item)
     {
-        var CanteenUpdate = await DBContext.Canteens.FirstOrDefaultAsync(m => m.Id == item.Id);
-        try
-        {
-            CanteenUpdate.City = item.City;
-            CanteenUpdate.HotMeals = item.HotMeals;
-            CanteenUpdate.Location = item.Location;
-        }
-        catch (Exception e)
-        {
-            throw new Exception(e.Message);
-        }
+        var CanteenUpdate = await DBContext.Canteens.FirstOrDefaultAsync(m => m.Id == item.Id)
+            ?? throw new Exception("Id not found");
 
+        CanteenUpdate.HotMeals = item.HotMeals;
+        
         await DBContext.SaveChangesAsync();
-        return CanteenUpdate ?? null;
+        return CanteenUpdate;
     }
 
     public IEnumerable<Canteen> GetAllByCity(string city)

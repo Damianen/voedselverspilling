@@ -18,12 +18,14 @@ public class ResorvationRepository(voedselverspillingDBContext DBContext) : IRes
 
     public Resorvation GetById(int id)
     {
-        return DBContext.Resorvations.FirstOrDefault(x => x.Id == id);
+        return DBContext.Resorvations.FirstOrDefault(x => x.Id == id)
+            ?? throw new Exception("Id not found");
     }
 
     public async Task<Resorvation> GetByIdAsync(int id)
     {
-        return await DBContext.Resorvations.FirstOrDefaultAsync(x => x.Id == id);
+        return await DBContext.Resorvations.FirstOrDefaultAsync(x => x.Id == id)
+            ?? throw new Exception("Id not found");
     }
 
     public async Task<Resorvation> AddAsync(Resorvation item)
@@ -41,28 +43,24 @@ public class ResorvationRepository(voedselverspillingDBContext DBContext) : IRes
 
     public async Task<Resorvation> UpdateAsync(Resorvation item)
     {
-        var ResorvationUpdate = await DBContext.Resorvations.FirstOrDefaultAsync(m => m.Id == item.Id);
-        try
-        {
-            ResorvationUpdate.PickedUp = item.PickedUp;
-        }
-        catch (Exception e)
-        {
-            throw new Exception(e.Message);
-        }
+        var ResorvationUpdate = await DBContext.Resorvations.FirstOrDefaultAsync(m => m.Id == item.Id) ?? throw new Exception("Id not found");
+        
+        ResorvationUpdate.Status = item.Status;
 
         await DBContext.SaveChangesAsync();
-        return ResorvationUpdate ?? null;
+        return ResorvationUpdate;
     }
 
-    public Resorvation GetByStudentId(string studentId)
+    public IEnumerable<Resorvation> GetByStudentId(string studentId)
     {
-        return DBContext.Resorvations.FirstOrDefault(x => x.StudentId == studentId);
+        return DBContext.Resorvations
+            .Include(x => x.Package)
+            .Where(x => x.StudentId == studentId);
     }
 
     public Resorvation GetByPackageId(int packageId)
     {
-        return DBContext.Resorvations.FirstOrDefault(x => x.Package.Id == packageId);
+        return DBContext.Resorvations.FirstOrDefault(x => x.Package.Id == packageId) ?? throw new Exception("Id not found");
     }
 
 }

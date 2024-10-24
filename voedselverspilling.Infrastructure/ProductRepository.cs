@@ -18,12 +18,14 @@ public class ProductRepository(voedselverspillingDBContext DBContext) : IProduct
 
     public Product GetById(int id)
     {
-        return DBContext.Products.FirstOrDefault(x => x.Id == id);
+        return DBContext.Products.FirstOrDefault(x => x.Id == id) 
+            ?? throw new Exception("Id not found");
     }
 
     public async Task<Product> GetByIdAsync(int id)
     {
-        return await DBContext.Products.FirstOrDefaultAsync(x => x.Id == id);
+        return await DBContext.Products.FirstOrDefaultAsync(x => x.Id == id) 
+            ?? throw new Exception("Id not found");
     }
 
     public async Task<Product> AddAsync(Product item)
@@ -41,20 +43,15 @@ public class ProductRepository(voedselverspillingDBContext DBContext) : IProduct
 
     public async Task<Product> UpdateAsync(Product item)
     {
-        var ProductUpdate = await DBContext.Products.FirstOrDefaultAsync(m => m.Id == item.Id);
-        try
-        {
-            ProductUpdate.Name = item.Name;
-            ProductUpdate.Alcoholic = item.Alcoholic;
-            ProductUpdate.Ingredients = item.Ingredients;
-        }
-        catch (Exception e)
-        {
-            throw new Exception(e.Message);
-        }
-
+        var ProductUpdate = await DBContext.Products.FirstOrDefaultAsync(m => m.Id == item.Id) 
+            ?? throw new Exception("Id not found");
+            
+        ProductUpdate.Name = item.Name;
+        ProductUpdate.Alcoholic = item.Alcoholic;
+        ProductUpdate.Ingredients = item.Ingredients;
+    
         await DBContext.SaveChangesAsync();
-        return ProductUpdate ?? null;
+        return ProductUpdate;
     }
 
     public IEnumerable<Product> GetAllByAlcoholic(bool alcoholic)
