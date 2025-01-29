@@ -1,0 +1,104 @@
+@{
+    ViewData["title"] = "New Package";
+}
+@model voedselverspilling.UI.Controllers.PackageController.NewModel
+
+<form asp-controller="Package" asp-action="NewPackage" method="post" asp-route-returnUrl="@Url.Action("Package", "", new { area = "" })" class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+  <div class="space-y-12 flex">
+    <div class="border-b border-gray-900/10 pb-12">
+      <h2 class="text-base font-semibold leading-7 text-gray-900">Nieuw pakket</h2>
+      <p class="mt-1 text-sm leading-6 text-gray-600">Vul hier de gegevens in van het nieuwe pakket</p>
+
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-4">
+          <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Naam</label>
+          <div class="mt-2">
+            <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-green_primairy sm:max-w-md">
+              <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm"></span>
+              <input  type="text" name="username" id="username" autocomplete="username" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
+            </div>
+          </div>
+        </div>
+        
+        <div class="sm:col-span-4">
+          <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Ophaal datum en tijd</label>
+          <div class="mt-2">
+            <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-green_primairy sm:max-w-md">
+              <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm"></span>
+              <input type="text" name="username" id="username" autocomplete="username" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
+            </div>
+          </div>
+        </div>
+
+        <div class="sm:col-span-4">
+          <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Prijs</label>
+          <div class="mt-2">
+            <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-green_primairy sm:max-w-md">
+              <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm"></span>
+              <input type="text" name="username" id="username" autocomplete="username" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
+            </div>
+          </div>
+        </div>
+
+        <div class="sm:col-span-4">
+          <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Foto naam</label>
+          <div class="mt-2">
+            <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-green_primairy sm:max-w-md">
+              <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm"></span>
+              <input type="text" name="username" id="username" autocomplete="username" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-b border-gray-900/10 pb-12">
+      <div class="mt-10 space-y-10">
+        <fieldset>
+        <legend class="text-sm font-semibold leading-6 text-gray-900">Producten</legend>
+        <div class="space-y-6 grid grid-cols-2">
+        @foreach (var product in Model.Products)
+        {
+            <div class="relative flex gap-x-3 items-end">
+                <div class="flex h-6 items-center">
+                    <input id="comments" name="comments" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-green_primairy focus:ring-green_primairy">
+                </div>
+                <div class="text-sm leading-6">
+                    <label for="comments" class="font-medium text-gray-900">@product.Name</label>
+                </div>
+            </div>
+        }
+        
+        </div>
+        
+    </fieldset>
+        <fieldset>
+          <legend class="text-sm font-semibold leading-6 text-gray-900 mb-3">Maaltijd type</legend>
+          <div class=" space-y-6 grid grid-cols-2">
+            <div class="flex items-end gap-x-3">
+              <input id="push-everything" name="push-notifications" type="radio" class="h-4 w-4 border-gray-300 text-green_primairy focus:ring-green_primairy">
+              <label for="push-everything" class="block text-sm font-medium leading-6 text-gray-900">Breakfast</label>
+            </div>
+            <div class="flex items-end gap-x-3">
+              <input id="push-email" name="push-notifications" type="radio" class="h-4 w-4 border-gray-300 text-green_primairy focus:ring-green_primairy">
+              <label for="push-email" class="block text-sm font-medium leading-6 text-gray-900">Lunch</label>
+            </div>
+            <div class="flex items-end gap-x-3">
+              <input id="push-nothing" name="push-notifications" type="radio" class="h-4 w-4 border-gray-300 text-green_primairy focus:ring-green_primairy">
+              <label for="push-nothing" class="block text-sm font-medium leading-6 text-gray-900">Dinner</label>
+            </div>
+            <div class="flex items-end gap-x-3">
+              <input id="push-nothing" name="push-notifications" type="radio" class="h-4 w-4 border-gray-300 text-green_primairy focus:ring-green_primairy">
+              <label for="push-nothing" class="block text-sm font-medium leading-6 text-gray-900">Snack</label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 flex items-center justify-end gap-x-6">
+    <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+    <button type="submit" class="rounded-md bg-green_primairy px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green_secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green_primairy">Save</button>
+  </div>
+</form>

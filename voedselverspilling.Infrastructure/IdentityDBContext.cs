@@ -17,11 +17,15 @@ public class IdentityDBContext : IdentityDbContext<IdentityUser>
     {
         base.OnModelCreating(builder);
 
-        var student = new IdentityRole("student");
-        student.NormalizedName = "student";
+        var student = new IdentityRole("student")
+        {
+            NormalizedName = "student"
+        };
 
-        var employee = new IdentityRole("employee");
-        employee.NormalizedName = "employee";
+        var employee = new IdentityRole("employee")
+        {
+            NormalizedName = "employee"
+        };
 
         builder.Entity<IdentityRole>().HasData(student, employee);
     }
